@@ -6,28 +6,28 @@ botaoAdicionar.addEventListener("click", function(event) {
     //Pegando os valores preenchidos no form
     var form = document.querySelector("#form-adiciona");
     var paciente = obtemPacienteDoFormulario(form);
-
-    //Criando mais uma linha que armazena os dados preenchidos no form
-    var pacienteTr = montaTr(paciente);
-   
+    
     //Validando paciente
     var erros = validaPaciente(paciente);
-    
     if(erros.length > 0){
         exibeMensagensDeErro(erros);
         return;
     }
 
     //Adicionando a nova linha com o preenchimento do form na tabela
-    var tabela = document.querySelector("#tabela-pacientes");
-
-    tabela.appendChild(pacienteTr);
+    adicionaPacienteNaTabela(paciente);
 
     //Reseta as informações preenchidas no form referentes ao paciente anterior já adicionado na tabela
     form.reset();
     var mensagensErro = document.querySelector("#mensagens-erro");
     mensagensErro.innerHTML = "";
 })
+
+function adicionaPacienteNaTabela(paciente){
+    var pacienteTr = montaTr(paciente);
+    var tabela = document.querySelector("#tabela-pacientes");
+    tabela.appendChild(pacienteTr);
+}
 
 function exibeMensagensDeErro(erros){
     var ul = document.querySelector("#mensagens-erro");
